@@ -4,7 +4,7 @@ import { extractDocxText, DocxExtractionError } from '../services/docxExtractor'
 import { ACCEPT_ATTRIBUTE, validateFile } from '../services/fileValidation';
 import { preloadOpenCv } from '../services/opencvLoader';
 import { type ScanOutcome, type ScanSource, openDocumentScanner, openScanViewer } from './documentScanner';
-import { cameraIcon } from './icons';
+import { cameraIcon, documentIcon } from './icons';
 import type { AttachedFile, DocumentDefinition, DocumentState } from '../types';
 
 export interface DocumentSlotHandle {
@@ -64,9 +64,14 @@ export function createDocumentSlot(
   const card = document.createElement('div');
   card.className = 'slot' + (required ? ' req' : '') + (def.multi ? ' multi' : '');
 
+  // Heading row: document icon + name (the strongest text on the card), then
+  // the Required / Optional badge, visually separate and smaller.
   card.innerHTML = `
-    <span class="tag ${required ? '' : 'opt'}"></span>
-    <h4><span class="docname"></span>${required ? '<span class="reqmark" aria-hidden="true"> *</span>' : ''}</h4>
+    <div class="slothead">
+      <span class="docicon">${documentIcon(def.key)}</span>
+      <h4><span class="docname"></span>${required ? '<span class="reqmark" aria-hidden="true"> *</span>' : ''}</h4>
+      <span class="tag ${required ? '' : 'opt'}"></span>
+    </div>
     <p class="sub"></p>
     <div class="btns">
       <button type="button" class="camicon">${cameraIcon()}</button>

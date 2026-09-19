@@ -51,12 +51,19 @@ export function createDocumentUploader(
     <div class="step-head"><span class="step-num">${t('step2.num')}</span><h2></h2>
       <span class="hint"></span></div>
     <p class="chooseinput"></p>
+    <div class="vehiclehead">
+      <span class="vehiclekicker"></span>
+      <h3 class="vehiclename"></h3>
+    </div>
     <div class="slotgroups"></div>`;
 
   const groups = section.querySelector<HTMLDivElement>('.slotgroups')!;
   const heading = section.querySelector<HTMLHeadingElement>('h2')!;
   const hint = section.querySelector<HTMLSpanElement>('.hint')!;
   const choose = section.querySelector<HTMLParagraphElement>('.chooseinput')!;
+  const vehicleKicker = section.querySelector<HTMLSpanElement>('.vehiclekicker')!;
+  const vehicleName = section.querySelector<HTMLHeadingElement>('.vehiclename')!;
+  section.dataset.vehicle = vehicleType;
   const groupTitles: Array<{ el: HTMLElement; key: string }> = [];
 
   function buildGroup(
@@ -115,6 +122,9 @@ export function createDocumentUploader(
     heading.textContent = t('step2.title');
     hint.textContent = t('step2.formats');
     choose.textContent = t('input.choose');
+    // The selected category heads the checklist, above every document name.
+    vehicleKicker.textContent = t('step2.vehicleCategory');
+    vehicleName.textContent = t(`vehicle.${vehicleType}`);
     for (const entry of groupTitles) entry.el.textContent = t(entry.key);
   }
 

@@ -137,6 +137,13 @@ while the document is being read, green once an image has been captured. Where
 the camera API is unavailable (for example a phone on a plain-HTTP address) the
 icon opens the device's own camera or file picker instead.
 
+Card hierarchy, strongest first: the selected vehicle category heading
+(26 px, 24 px on phones), then each card's document icon and name (bold,
+19 px / 17 px on phones, never truncated), the Required or Optional badge
+(Optional is neutral grey, never error-red), the description, the camera and
+upload controls, the preview, and the status. Document icons are inline line
+icons in `src/components/icons.ts`.
+
 Each card also has a preview area — the attached image in full, at its own
 aspect ratio, nothing cropped by the card — and a Status line (Not Uploaded /
 ✅ Uploaded). Required and optional documents sit in separate sections, with

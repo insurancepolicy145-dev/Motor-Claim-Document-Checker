@@ -53,6 +53,7 @@ export const en = {
   'step2.required': 'Required',
   'step2.optional': 'Optional',
   'step2.none': 'None for this vehicle type.',
+  'step2.vehicleCategory': 'Vehicle category',
   'step2.requiredTitle': 'Required Documents',
   'step2.requiredDesc': 'These documents are required for claim verification.',
   'step2.optionalTitle': 'Optional Documents',

@@ -610,3 +610,66 @@ button.docpreview.filled{padding:6px;border:1px solid var(--rule);background:#F4
 .scanner .scanbar .scanswitch{justify-self:start}
 .scanner .scanbar .scanupload{justify-self:end}
 .scanshutterwrap{grid-column:2;justify-self:center}
+
+/* =========================================================================
+   Document headings — visual hierarchy
+   1 vehicle category · 2 document name · 3 Required/Optional ·
+   4 description · 5 controls · 6 preview · 7 status
+   Presentation only: no behaviour depends on these rules.
+   ========================================================================= */
+
+/* 1 — Vehicle category: the strongest heading in the documents section. */
+.vehiclehead{margin:2px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--slate)}
+.vehiclekicker{display:block;font:500 11px "IBM Plex Mono",monospace;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink-soft)}
+.vehiclename{margin:2px 0 0;font-family:"Zilla Slab",serif;font-size:26px;font-weight:700;
+  line-height:1.15;letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
+
+/* Card shell: rounded, subtle border and shadow, consistent padding. */
+.slot{border-radius:10px;padding:0 14px 14px}
+.slot.req{border-left-width:3px}
+
+/* Heading area, lightly tinted and ruled off from the card body. */
+.slothead{display:flex;align-items:center;gap:10px;margin:0 -14px 12px;padding:12px 14px;
+  background:#F4F7F8;border-bottom:1px solid var(--rule);border-radius:9px 9px 0 0}
+.slot.req .slothead{margin-left:-14px;border-top-left-radius:7px}
+.slot:not(.req) .slothead{background:#F8F7F3}
+
+/* Document icon, 22 px, in a small tile so every card lines up. */
+.docicon{flex:none;display:grid;place-items:center;width:36px;height:36px;border-radius:8px;
+  background:#fff;border:1px solid var(--rule);color:var(--slate)}
+.docicon .icon{width:22px;height:22px;display:block}
+.slot:not(.req) .docicon{color:var(--ink-soft)}
+
+/* 2 — Document name: bold, high contrast, wraps rather than truncating. */
+.slot .slothead h4{flex:1 1 auto;min-width:0;margin:0;font-family:"Zilla Slab",serif;
+  font-size:19px;font-weight:700;line-height:1.25;letter-spacing:.015em;text-transform:uppercase;
+  color:var(--ink);overflow-wrap:anywhere;white-space:normal}
+
+/* 3 — Required / Optional badge: smaller than the name, never error-red. */
+.slot .slothead .tag{float:none;flex:none;margin:0;align-self:center;padding:3px 8px;border-radius:4px;
+  font:600 11px "IBM Plex Mono",monospace;letter-spacing:.08em;text-transform:uppercase;
+  background:#fff;border:1px solid var(--slate);color:var(--slate)}
+.slot .slothead .tag.opt{border-color:var(--rule);color:var(--ink-soft);background:#fff}
+
+/* 4 — Description, then 7 — status: both clearly secondary to the name. */
+.slot .sub{font-size:14px;line-height:1.45;color:var(--ink-soft);margin:0 0 12px}
+.docstatus{font-size:13.5px}
+
+/* Desktop hover: slight lift through shadow and border, no movement. */
+@media (hover:hover) and (pointer:fine){
+  .slot{transition:box-shadow .15s ease,border-color .15s ease}
+  .slot:hover{border-color:#B7C2C6;
+    box-shadow:0 1px 0 rgba(22,33,43,.06),0 12px 28px -16px rgba(22,33,43,.45)}
+  .slot.req:hover{border-left-color:var(--slate)}
+}
+@media (prefers-reduced-motion:reduce){.slot{transition:none}}
+
+/* Mobile: slightly smaller type, same order, nothing truncated. */
+@media (max-width:640px){
+  .vehiclename{font-size:24px}
+  .slot .slothead h4{font-size:17px}
+  .docicon{width:34px;height:34px}
+  .docicon .icon{width:20px;height:20px}
+  .slot .sub{font-size:14px}
+}
